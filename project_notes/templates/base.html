@@ -14,32 +14,30 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
                 {% if not request.user.is_authenticated %}
-                <div class="d-flex flex-row-reverse bd-highlight mb-3">
-                    <div class="d-flex flex-column">
-                        <a class="btn btn-light btn-sm mb-1" href="#" role="button">Регистрация</a>
-                        <a class="btn btn-light btn-sm" href="#" role="button">Вход</a>
+                <div class="d-flex flex-row-reverse align-items-center">
+                    <div class="p2">
+                        <a class="btn btn-secondary" href="#" role="button">Вход</a>
+                        <a class="btn btn-secondary" href="#" role="button">Регистрация</a>
                     </div>
                 </div>
                 {% else %}
-                <div class="d-flex flex-row-reverse bd-highlight">
-                    <div class="p-2 bd-highlight">
-                        <h3>{{request.user.last_name}} {{request.user.first_name}}</h3>
-                    </div>
+                <div class="d-flex flex-row-reverse align-items-center">
                     <div class="p-2 bd-highlight">
                         <form method="POST" action="#">
                             {% csrf_token %}
                             <button class="btn btn-sm btn-danger" type="submit" style="width: 100%">Выйти</button>
                         </form>
                     </div>
+                    <div class="p-2 bd-highlight">
+                        <h3>{{request.user.last_name}} {{request.user.first_name}}</h3>
+                    </div>
                 </div>
                 {% endif %}
 
           </div>
         </div>
-      </div>
     </nav>
     {% block content %}{% endblock content %}
 </body>
