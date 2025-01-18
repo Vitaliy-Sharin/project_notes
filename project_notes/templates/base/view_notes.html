@@ -1,0 +1,26 @@
+{% for note in notes %}
+     <div class="card w-75">
+        <div class="card-header">
+            <a href="#" class="link-dark" style="text-decoration: none"><h4 class="card-title text-center">{{ note.name }}</h4></a>
+        </div>
+        <div class="card-body">
+            <div class="d-flex justify-content-between">
+                <div class="p-2">
+                    <p class="font-weight-light">Дата создания: {{ note.date_create }}</p>
+                    <p class="font-weight-light">Дата последнего изменения: {{ note.date_of_editing }}</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div class="p-2">
+                    <a class="btn btn-outline-secondary" href="#">Переименовать</a>
+                </div>
+                <div class="p-2">
+                    <a class="btn btn-secondary" href="#">Изменить</a>
+                </div>
+                <div class="p-2">
+                    <a class="btn btn-danger" href="#">Удалить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
