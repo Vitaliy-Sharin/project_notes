@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}Папка {{ folder.name }}{% endblock title %}
+{% block title %}
+    {% if not user_error %}
+        Папка {{ folder.name }}
+    {% else %}
+        Ошибка
+    {% endif %}
+{% endblock title %}
 {% block content %}
 {% if not user_error %}
     <h4 class="text-center">{{ folder.name }}</h4>
