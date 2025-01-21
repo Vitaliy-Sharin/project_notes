@@ -1,54 +1,46 @@
 {% extends 'base.html' %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    {% block content %}
-    {% if not request.user.is_authenticated %}
-        <h1 class="text-center">Чтобы просматривать заметки войдите или зарегистрируйтесь</h1>
-    {% elif not user_notes and not user_folders%}
-        <h3 class="text-center">У вас нет ни одной заметки или папки</h3>
-    {% else %}
-        {% if user_folders %}
-            <h3 >Папки:</h3>
-            <div class="d-flex justify-content-center">
-                {% for folder in user_folders %}
-                    <div class="card w-75">
-                        <div class="card-header">
-                            <a href="{% url 'view_folder' request.user.id folder.id %}"
-                               class="link-dark" style="text-decoration: none">
-                                <h4 class="card-title text-center">{{ folder.name }}</h4>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <p class="font-weight-light">Дата создания: {{ folder.date_create }}</p>
-                            <div class="d-flex justify-content-between">
-                                <div class="p-2">
-                                    <a class="btn btn-outline-secondary" href="#">Переименовать</a>
-                                </div>
-                                <div class="p-2">
-                                    <a class="btn btn-danger" href="#">Удалить</a>
-                                </div>
+{% block title %}Домашняя страница{% endblock title %}
+{% block content %}
+{% if not request.user.is_authenticated %}
+    <h1 class="text-center">Чтобы просматривать заметки войдите или зарегистрируйтесь</h1>
+{% elif not user_notes and not user_folders%}
+    <h3 class="text-center">У вас нет ни одной заметки или папки</h3>
+{% else %}
+    {% if user_folders %}
+        <h3 >Папки:</h3>
+        <div class="d-flex justify-content-center">
+            {% for folder in user_folders %}
+                <div class="card w-75">
+                    <div class="card-header">
+                        <a href="{% url 'view_folder' request.user.id folder.id %}"
+                           class="link-dark" style="text-decoration: none">
+                            <h4 class="card-title text-center">{{ folder.name }}</h4>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <p class="font-weight-light">Дата создания: {{ folder.date_create }}</p>
+                        <div class="d-flex justify-content-between">
+                            <div class="p-2">
+                                <a class="btn btn-outline-secondary" href="#">Переименовать</a>
+                            </div>
+                            <div class="p-2">
+                                <a class="btn btn-danger" href="#">Удалить</a>
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <h3 class="text-center">У вас нет папок</h3>
-        {% endif %}
-        {% if user_notes %}
-            <h3 >Одиночные заметки:</h3>
-            <div class="d-flex justify-content-center">
-                {% include "base/view_notes.html" with notes=user_notes %}
-            </div>
-        {% else %}
-            <h3 class="text-center">У вас нет одиночных заметок</h3>
-        {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h3 class="text-center">У вас нет папок</h3>
     {% endif %}
-    {% endblock content %}
-</body>
-</html>
+    {% if user_notes %}
+        <h3 >Одиночные заметки:</h3>
+        <div class="d-flex justify-content-center">
+            {% include "base/view_notes.html" with notes=user_notes %}
+        </div>
+    {% else %}
+        <h3 class="text-center">У вас нет одиночных заметок</h3>
+    {% endif %}
+{% endif %}
+{% endblock content %}
