@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+{% if not user_error %}
+        {{ note.name }}
+    {% else %}
+        Ошибка
+    {% endif %}
+{% endblock title %}
+{% block content %}
+{% if not user_error %}
+    <div class="d-flex justify-content-around">
+        <div class="p-2">
+            <a href="#" class="btn btn-outline-secondary">Переименовать</a>
+        </div>
+        <div class="p-2">
+            <a class="btn btn-secondary" href="#">Переместить</a>
+        </div>
+        <div class="p-2">
+            <a class="btn btn-secondary" href="#">Изменить</a>
+        </div>
+        <div class="p-2">
+            <a class="btn btn-danger" href="#">Удалить</a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-around mt-3">
+        <div class="col-10">
+            <p>{{ note.note_text }}</p>
+        </div>
+    </div>
+{% else %}
+    <h4 class="text-center">{{user_error}}</h4>
+{% endif %}
+{% endblock content %}
