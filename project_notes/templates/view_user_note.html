@@ -24,7 +24,7 @@
     </div>
     <div class="d-flex justify-content-around mt-3">
         <div class="col-10">
-            <p>{{ note.note_text }}</p>
+            {{ html_text|safe }}
         </div>
     </div>
 {% else %}

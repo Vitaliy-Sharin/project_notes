@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_http_methods
+import markdown
 
 from notes.models import Note, Folder
 
@@ -42,8 +43,12 @@ def view_note(request, id_user, id_note):
         user_error = 'Данная заметка принадлежит другому пользователю'
         return render(request, 'view_user_note.html', {'user_error': user_error})
     gotten_note = get_object_or_404(Note, id=id_note, user__id=id_user)
+    markdown_text = gotten_note.note_text
+    html_text = markdown.markdown(markdown_text)
+    print(markdown_text)
     data = {
         'user_error': None,
         'note': gotten_note,
+        'html_text': html_text,
     }
     return render(request, 'view_user_note.html', data)
